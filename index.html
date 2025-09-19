@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Legospace — Custom Homes & Commercial Spaces</title>
+    <meta name="theme-color" content="#5D412C">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F9F7F5;
+            --card: #ffffff;
+            --primary: #5D412C;
+            --primary-light: #7E624E;
+            --muted: #6B7280;
+            --accent: #111827;
+            --radius: 14px;
+            --shadow: 0 12px 24px rgba(0,0,0,0.05);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        * {box-sizing: border-box}
+        html, body {height: 100%; margin: 0; background: var(--bg); color: var(--accent); scroll-behavior: smooth;}
+        a {color: inherit; text-decoration: none;}
+        h1, h2, h3, h4 {font-family: 'Playfair Display', serif;}
+        .container {max-width: 1200px; margin: 0 auto; padding: 0 24px;}
+        section {padding: 80px 0;}
+
+        /* NAV */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            background: var(--bg); 
+            backdrop-filter: none; 
+            z-index: 60;
+            transition: background-color 0.3s ease;
+            box-shadow: none; 
+        }
+        .brand {display: flex; gap: 12px; align-items: center;}
+        .brand h1 {margin: 0; font-size: 28px; font-weight: 700; color: var(--primary);}
+        .brand p {font-size: 14px;}
+        .logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 0; 
+            background: transparent; 
+            box-shadow: none; 
+            display: grid; 
+            place-items: center; 
+            overflow: hidden;
+        }
+        .logo img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain;
+        }
+        .nav-links {display: flex; gap: 24px; align-items: center;}
+        .nav-link {color: var(--muted); font-weight: 500; transition: color 0.3s ease;}
+        .nav-link:hover {color: var(--primary);}
+        .btn {padding: 12px 24px; border-radius: 999px; background: var(--primary); color: white; font-weight: 600; border: none; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;}
+        .btn:hover {transform: translateY(-2px); box-shadow: 0 4px 12px rgba(93, 65, 44, 0.2);}
+        .outline {background: transparent; border: 2px solid var(--primary); padding: 10px 22px; border-radius: 999px; cursor: pointer; color: var(--primary); font-weight: 600; transition: background-color 0.3s ease, color 0.3s ease;}
+        .outline:hover {background-color: var(--primary); color: white;}
+
+        /* --- NEW CSS for Hamburger Menu --- */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
+        .hamburger-bar {
+            width: 30px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+        /* Style for when the hamburger menu is active */
+        .hamburger.active .bar1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        .hamburger.active .bar2 {
+            opacity: 0;
+        }
+        .hamburger.active .bar3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        /* --- END NEW CSS --- */
+
+        /* HERO */
+        .hero {display: grid; grid-template-columns: 1fr 500px; gap: 48px; align-items: center; padding: 80px 0;}
+        .hero h2 {font-size: 48px; margin: 0 0 12px; line-height: 1.1; color: var(--primary);}
+        .hero p {color: var(--muted); margin: 0 0 24px; font-size: 18px;}
+        .cta-row {display: flex; gap: 16px; margin-top: 24px;}
+        
+        .hero-visual {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 24px 48px rgba(0,0,0,0.1);
+            height: 420px;
+        }
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.05);
+            z-index: 2;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+        }
+        .hero-visual video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Sections */
+        h3 {font-size: 36px; margin: 0 0 10px; color: var(--primary); text-align: center;}
+        .section-desc {text-align: center; color: var(--muted); margin-bottom: 40px;}
+        .grid-3 {display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px;}
+        .card {background: var(--card); padding: 24px; border-radius: 16px; box-shadow: var(--shadow); transition: transform 0.3s ease, box-shadow 0.3s ease;}
+        .card:hover {transform: translateY(-8px); box-shadow: 0 28px 60px rgba(0,0,0,0.12);}
+        .thumb {width: 100%; height: 200px; border-radius: 12px; object-fit: cover; display: block; filter: grayscale(100%); transition: filter 0.5s ease;}
+        .card:hover .thumb {filter: grayscale(0);}
+        .card h4 {font-size: 22px; margin: 12px 0 6px; color: var(--primary);}
+        .card p {font-size: 15px; margin: 0;}
+
+        /* Testimonials */
+        .testimonials-grid {display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;}
+        .testimonial-card {padding: 24px; background: var(--card); border-radius: 16px; box-shadow: var(--shadow); position: relative; transition: transform 0.3s ease;}
+        .testimonial-card::before {
+            content: "''";
+            font-family: 'Playfair Display', serif;
+            font-size: 60px;
+            color: rgba(93, 65, 44, 0.1);
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+        }
+        .testimonial-card blockquote {font-style: italic; margin: 0 0 16px; color: var(--primary-light); font-size: 18px; line-height: 1.6; position: relative; z-index: 2;}
+        .testimonial-card cite {display: block; font-weight: 600; color: var(--accent); font-size: 16px; position: relative; z-index: 2;}
+        .testimonial-card cite span {display: block; font-weight: 400; font-size: 14px; color: var(--muted);}
+
+        /* Photo Slideshow */
+        .photo-slideshow {
+            padding: 60px 0;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .slideshow-container {
+            max-width: 100%;
+            position: relative;
+            margin: auto;
+            border-radius: var(--radius);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .mySlides {
+            display: none;
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            animation: fadeIn 0.8s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Contact Grid */
+        .contact-grid {display: grid; grid-template-columns: 1fr 420px; gap: 40px; align-items: flex-start;}
+        form .field {display: flex; flex-direction: column; margin-bottom: 16px;}
+        label {font-weight: 600; margin-bottom: 6px; font-size: 14px; color: var(--primary);}
+        input, textarea, select {padding: 12px; border-radius: 8px; border: 1px solid rgba(16,24,40,0.08); background: #fcfbf9; font-size: 14px;}
+        textarea {min-height: 140px; resize: vertical;}
+
+        /* --- Updated CSS for the phone number alignment --- */
+        .contact-phone {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap; /* Prevents wrapping */
+        }
+        .contact-phone-text {
+            font-size: 13px;
+            margin-left: 10px;
+            white-space: nowrap; /* Forces text to stay on one line */
+        }
+
+        /* Footer */
+        footer {padding: 40px 0; color: var(--muted); text-align: center;}
+        .footer-links {display: flex; justify-content: center; gap: 24px; margin-top: 10px;}
+        
+        /* Modal Pop-up Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .modal-overlay.visible {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: var(--card);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        .modal-content .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--muted);
+            transition: color 0.3s ease;
+        }
+        .modal-content .close-btn:hover {
+            color: var(--accent);
+        }
+        .modal-content h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        /* Responsiveness */
+        /* Tablet and smaller laptop screens */
+        @media (max-width: 980px) {
+            .hero {grid-template-columns: 1fr; padding: 40px 0;}
+            .hero-visual {min-height: 300px; margin-top: 24px; height: auto;}
+            .grid-3, .testimonials-grid {grid-template-columns: repeat(2, 1fr);}
+            .contact-grid {grid-template-columns: 1fr;}
+            .section-desc {margin-bottom: 30px;}
+            .logo {width: 85px; height: 85px;}
+            .brand h1 {font-size: 24px;}
+            .footer-links {justify-content: center; flex-wrap: wrap;}
+        }
+
+        /* Mobile phones */
+        @media (max-width: 620px) {
+            .container {padding: 0 16px;}
+            .grid-3, .testimonials-grid {grid-template-columns: 1fr;}
+            .hero h2 {font-size: 32px;}
+            .mySlides {height: 300px;}
+            
+            /* UPDATED CSS to handle mobile navigation */
+            .nav-links {
+                display: none; /* Hide by default */
+                position: absolute;
+                top: 72px; /* Position below the header */
+                left: 0;
+                width: 100%;
+                background-color: var(--bg);
+                flex-direction: column;
+                padding: 20px 0;
+                border-top: 1px solid rgba(0,0,0,0.1);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            }
+            .nav-links.active {
+                display: flex; /* Show when active */
+                animation: slideIn 0.3s forwards;
+            }
+            .nav-link, .btn {
+                margin: 10px 24px;
+                width: auto;
+            }
+            .hamburger {
+                display: flex; /* Show hamburger on mobile */
+            }
+            @keyframes slideIn {
+                from { transform: translateY(-10px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+            
+            .brand h1 {font-size: 18px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="brand" data-aos="fade-right">
+                <div class="logo" aria-hidden>
+                    <img src="logo.png" alt="Legospace Logo">
+                </div>
+                <div>
+                    <h1>Legospace</h1>
+                    <p>Built for you, not the masses</p>
+                </div>
+            </div>
+            
+            <div class="hamburger">
+                <div class="hamburger-bar bar1"></div>
+                <div class="hamburger-bar bar2"></div>
+                <div class="hamburger-bar bar3"></div>
+            </div>
+
+            <div class="nav-links" data-aos="fade-left">
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#services">Services</a>
+                <a class="nav-link" href="#projects">Projects</a>
+                <a class="nav-link" href="#photo-slideshow">Gallery</a>
+                <a class="nav-link" href="#contact">Contact</a>
+                <button class="btn" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Enquire Now</button>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <div class="hero-text" data-aos="fade-right" data-aos-duration="1000">
+                <div style="display:inline-block;background:rgba(93,65,44,0.1);padding:8px 16px;border-radius:999px;font-weight:600;font-size:14px;color:var(--primary)">
+                    Customization is Our Uniqueness 
+                </div>
+                <h2>"Your vision, our craft" — luxury & modern spaces tailored for you.</h2>
+                <p class="muted">Quality craftsmanship, sustainable choices, and contemporary design. We build residential and commercial spaces that truly reflect your identity.</p>
+                <div class="cta-row">
+                    <button class="btn" onclick="document.querySelector('#projects').scrollIntoView({behavior:'smooth'})">Explore Projects</button>
+                    <button class="outline" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Request Callback</button>
+                </div>
+            </div>
+            <div class="hero-visual" aria-hidden data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <video id="hero-scroll-video" muted playsinline preload="metadata">
+                    <source src="house-video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </header>
+    </div>
+
+    <section id="about">
+        <div class="container">
+            <h3 data-aos="fade-up">About Legospace</h3>
+            <p class="section-desc" data-aos="fade-up" data-aos-delay="100">We are a team of dedicated professionals turning your vision into reality with precision and care.</p>
+            <div class="grid-3">
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <h4>Human-Centric Design</h4>
+                    <p class="muted">We focus on creating spaces that are not just beautiful but also comfortable and highly functional for daily living.</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="300">
+                    <h4>Sustainable Vision</h4>
+                    <p class="muted">Our commitment to sustainability means using eco-conscious materials and methods to build for a better future.</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="400">
+                    <h4>Transparent Process</h4>
+                    <p class="muted">We provide clear timelines and budgets, ensuring you are informed and confident throughout the entire project.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" style="background:transparent">
+        <div class="container">
+            <h3 data-aos="fade-up">Our Services</h3>
+            <p class="section-desc" data-aos="fade-up" data-aos-delay="100">From initial design to final handover, we offer end-to-end solutions for all your construction needs.</p>
+            <div class="grid-3">
+                <div class="card" data-aos="fade-up" data-aos-delay="200"><h4>Residential Construction</h4><p class="muted">Crafting custom homes with premium finishes and smart, flowing layouts tailored for modern life.</p></div>
+                <div class="card" data-aos="fade-up" data-aos-delay="300"><h4>Commercial Spaces</h4><p class="muted">Building offices and retail spaces that blend performance, aesthetics, and brand identity seamlessly.</p></div>
+                <div class="card" data-aos="fade-up" data-aos-delay="400"><h4>Project Management</h4><p class="muted">Expert planning, procurement, and execution to ensure your project is delivered on time and on budget.</p></div>
+                <div class="card" data-aos="fade-up" data-aos-delay="500"><h4>Interior Design</h4><p class="muted">Full-service interior design from concept to completion, creating stunning and personalized indoor environments.</p></div>
+                <div class="card" data-aos="fade-up" data-aos-delay="600"><h4>Renovations & Additions</h4><p class="muted">Transforming existing spaces with thoughtful design and expert craftsmanship to meet new needs.</p></div>
+                <div class="card" data-aos="fade-up" data-aos-delay="700"><h4>Turnkey Solutions</h4><p class="muted">Delivering ready-to-move-in properties, managing every detail from foundation to final decor.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h3 data-aos="fade-up">Projects — Turning Blueprints into Reality</h3>
+            <p class="section-desc" data-aos="fade-up" data-aos-delay="100">Selected works showcasing our commitment to quality, design, and client satisfaction across various sectors.</p>
+            <div class="grid-3">
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <img class="thumb" src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80" alt="Residential Villa">
+                    <h4>Modern Residential Villa</h4>
+                    <p class="muted">Contemporary architecture with premium interior finishes, designed for a luxurious lifestyle in Chennai.</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="300">
+                    <img class="thumb" src="cmc.png" alt="Commercial Complex">
+                    <h4>Commercial Complex</h4>
+                    <p class="muted">Elegant facades and efficient floorplans for a high-performance commercial space in Coimbatore.</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="400">
+                    <img class="thumb" src="download (3).png" alt="Turnkey Interiors">
+                    <h4>Turnkey Interior Project</h4>
+                    <p class="muted">Complete interior fit-outs for a modern apartment, ready for move-in with a seamless finish in Chennai.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" style="background: #EAE6E0;">
+        <div class="container">
+            <h3 data-aos="fade-up">What Our Clients Say</h3>
+            <p class="section-desc" data-aos="fade-up" data-aos-delay="100">Our success is built on the satisfaction of those we work with.</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <blockquote>"Legospace exceeded all expectations. The attention to detail and craftsmanship transformed our vision into a dream home. The process was seamless and stress-free."</blockquote>
+                    <cite>Anand Kumar<span>Homeowner, Chennai</span></cite>
+                </div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <blockquote>"We were impressed with their professionalism and commitment to our project. They delivered our new office on time and on budget, and the result is stunning."</blockquote>
+                    <cite>Priya Sharma<span>Founder, Tech Solutions</span></cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="photo-slideshow" class="photo-slideshow">
+        <h3 data-aos="fade-up">Our Latest Creations</h3>
+        <p class="section-desc" data-aos="fade-up" data-aos-delay="100">A glimpse into the diverse projects and bespoke designs we bring to life.</p>
+        <div class="slideshow-container" data-aos="fade-up" data-aos-delay="200">
+            <img class="mySlides" src="img1.png">
+            <img class="mySlides" src="img2.png">
+            <img class="mySlides" src="img3.png">
+            <img class="mySlides" src="img4.png">
+            <button class="prev" onclick="plusSlides(-1)">❮</button>
+            <button class="next" onclick="plusSlides(1)">❯</button>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h3 data-aos="fade-up">Let’s Customize & Build Together</h3>
+            <p class="section-desc" data-aos="fade-up" data-aos-delay="100">Tell us about your project and we'll get back to you quickly to discuss how we can help.</p>
+            <div class="contact-grid">
+                <div class="card" data-aos="fade-right" data-aos-delay="200">
+                    <h4>Quick Contact Form</h4>
+                    <form id="leadForm">
+                        <div class="field"><label>Full Name</label><input name="name" required></div>
+                        <div class="field"><label>Phone Number</label><input name="phone" required></div>
+                        <div class="field"><label>Email Address</label><input name="email" type="email" required></div>
+                        <div class="field"><label>Project Type</label><select name="looking"><option>Residential</option><option>Commercial</option><option>Renovation</option><option>Consultation</option></select></div>
+                        <div class="field"><label>Message / Project Details</label><textarea name="message" placeholder="Describe your project here..."></textarea></div>
+                        <div class="contact-phone">
+                            <button class="btn" type="submit">Send Message</button>
+                            <div class="contact-phone-text muted">Or call: <strong>+91-8695 700 700</strong></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card" data-aos="fade-left" data-aos-delay="200">
+                    <h4>Office & Contact</h4>
+                    <p class="muted"><strong>Address:</strong> Door No.1650, 2nd Floor, AAA Towers, Avinashi Road, Near Hope College, B.R.Puram, Coimbatore - 641004</p>
+                    <p class="muted"><strong>Email:</strong> info@legospace.in</p>
+                    <p class="muted"><strong>Follow us:</strong> <a href="https://www.facebook.com/profile.php?id=61580956893074" class="nav-link" target="blank">Facebook</a> | <a href="https://www.instagram.com/legospace2025/" class="nav-link" target="_blank">Instagram</a> | <a href="#" class="nav-link">LinkedIn</a></p>
+                    <div style="margin-top:20px;display:flex;gap:10px;">
+                        <button class="outline" onclick="openMap()">Open Map</button>
+                        <button class="outline" onclick="openWhatsApp()">WhatsApp Us</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+            <div data-aos="fade-up">
+                <strong>Legospace</strong>
+                <p class="muted" style="font-size:13px;margin-top:4px;">Building Beyond Limits — © 2025 Legospace. All Rights Reserved.</p>
+            </div>
+            <div class="muted footer-links" data-aos="fade-up" data-aos-delay="100">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#photo-slideshow" class="nav-link">Gallery</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="modal-popup" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <div id="popup-content">
+                <h4>Interested in our projects?</h4>
+                <p class="muted" style="margin-bottom:20px;">Leave your details below and we will get in touch with you shortly.</p>
+                <form id="popup-form">
+                    <div class="field"><label>Full Name</label><input name="name" required></div>
+                    <div class="field"><label>Phone Number</label><input name="phone" required></div>
+                    <div class="field"><label>Email Address</label><input name="email" type="email" required></div>
+                    <button class="btn" type="submit" style="width:100%; margin-top:10px;">Submit</button>
+                </form>
+            </div>
+            <div id="popup-success-message" style="display:none; text-align:center;">
+                <h4>Thank You!</h4>
+                <p>We have received your message and will be in touch shortly.</p>
+                <button class="btn close-btn" style="margin-top:20px;">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS for scroll animations
+        AOS.init({
+            once: true 
+        });
+
+        // Form handler for the main contact form
+        document.getElementById('leadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fd = new FormData(e.target);
+            const name = fd.get('name') || '';
+            const phone = fd.get('phone') || '';
+            const email = fd.get('email') || '';
+            const looking = fd.get('looking') || '';
+            const message = fd.get('message') || '';
+            const subject = encodeURIComponent('New Enquiry from ' + name + ' — ' + looking);
+            const body = encodeURIComponent(
+                'Name: ' + name + '\nPhone: ' + phone + '\nEmail: ' + email + '\nLooking For: ' + looking + '\n\nMessage:\n' + message
+            );
+            window.location.href = 'mailto:info@legospace.com?subject=' + subject + '&body=' + body;
+        });
+
+        // Functions to open map and WhatsApp
+        function openMap() { window.open('http://googleusercontent.com/maps.google.com/6', '_blank') }
+        function openWhatsApp() { window.open('https://wa.me/91918695700700', '_blank') }
+
+        // Scroll-driven video playback
+        const video = document.getElementById('hero-scroll-video');
+        if (video) {
+            video.addEventListener('loadedmetadata', () => {
+                video.currentTime = 0; // Start at the beginning
+                video.play();
+                video.loop = true;
+            });
+            if (video.readyState >= 2) {
+                video.dispatchEvent(new Event('loadedmetadata'));
+            }
+        }
+
+        // Slideshow logic
+        let slideIndex = 0;
+        let slideshowInterval;
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].style.display = "block";
+            slideshowInterval = setTimeout(showSlides, 4000);
+        }
+
+        function plusSlides(n) {
+            clearTimeout(slideshowInterval);
+            slideIndex += n;
+            let slides = document.getElementsByClassName("mySlides");
+            if (slideIndex > slides.length) {slideIndex = 1}
+            if (slideIndex < 1) {slideIndex = slides.length}
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "block";
+            slideshowInterval = setTimeout(showSlides, 4000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showSlides();
+            
+            // Pop-up logic after 5 seconds
+            const modal = document.getElementById('modal-popup');
+            const closeBtns = document.querySelectorAll('.close-btn');
+            const popupForm = document.getElementById('popup-form');
+            const popupContent = document.getElementById('popup-content');
+            const popupSuccessMessage = document.getElementById('popup-success-message');
+            
+            setTimeout(() => {
+                modal.classList.add('visible');
+            }, 5000); // 5000 milliseconds = 5 seconds
+
+            // Handle closing the modal
+            closeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    modal.classList.remove('visible');
+                    setTimeout(() => {
+                        popupContent.style.display = 'block';
+                        popupSuccessMessage.style.display = 'none';
+                        popupForm.reset();
+                    }, 400);
+                });
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('visible');
+                    setTimeout(() => {
+                        popupContent.style.display = 'block';
+                        popupSuccessMessage.style.display = 'none';
+                        popupForm.reset();
+                    }, 400);
+                }
+            });
+
+            // Handle the pop-up form submission
+            popupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const data = Object.fromEntries(formData.entries());
+                
+                console.log('Pop-up form submitted:', data);
+                
+                popupContent.style.display = 'none';
+                popupSuccessMessage.style.display = 'block';
+            });
+
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+
+            // Close mobile menu on link click
+            navLinks.querySelectorAll('a, button').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
